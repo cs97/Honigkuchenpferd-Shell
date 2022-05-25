@@ -2,7 +2,6 @@
 
 Simple Reverse and Bind Shell 
 
+```
 
-´´´
 
-´´´
