@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 IP="192.168.1.x"
 PORT="8080"
