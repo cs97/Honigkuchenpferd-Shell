@@ -1,4 +1,8 @@
 #!/usr/bin/python
+#
+#python2.7 and python3
+#
+
 import os
 import sys
 import socket
