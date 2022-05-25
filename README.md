@@ -1,6 +1,7 @@
 # Honigkuchenpferd-Shell
 
 Simple Reverse and Bind Shell 
+python2.7 and python3
 
 
 
