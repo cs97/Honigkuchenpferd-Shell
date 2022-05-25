@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-#python2.7 and python3
+# python2.7 and python3
 #
 
 import os
@@ -41,13 +41,15 @@ def easy_chdir(s):
         os.chdir(s)
     except:
         pass
-    
+
+# python2.7 and python3
 def to_bytes(s):
     if sys.version_info[0] < 3:
         return bytes(s)
     else:
         return bytes(s, 'utf-8')
-    
+
+# python2.7 and python3
 def to_str(s):
     if sys.version_info[0] < 3:
         return str(s)
