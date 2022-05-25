@@ -2,6 +2,8 @@
 
 free to use but doesn't mess up mmmkay !
 
+![Screenshot](picture/hacking-is-bad-mmmkay.jpg)
+
 Simple Reverse and Bind Shell
 
 python2.7 and python3
