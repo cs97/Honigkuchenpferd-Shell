@@ -9,7 +9,7 @@ import socket
 
 IP='127.0.0.1'
 
-REVERSE=True
+REVERSE=True        #False=bind shell
 
 class tcp_socket():
 
