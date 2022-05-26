@@ -63,7 +63,7 @@ def easy_chdir(s):
         pass
     
     
-def easy_file_send(filename, IP):
+def easy_file_send(filename):
     xf = get_conn(6667)
     xf.send_file(filename)
 
