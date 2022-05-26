@@ -50,7 +50,7 @@ def easy_chdir(s):
     except:
         pass
     
-def easy_file_send_reverse(filename, IP):
+def easy_file_send(filename, IP):
     if REVERSE == True:
         xf = tcp_socket()
         xf.connect_to(IP, 6667)
