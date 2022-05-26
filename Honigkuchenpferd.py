@@ -37,6 +37,7 @@ class tcp_socket():
     def close(self):
         self.conn.close()
 
+        
 def get_conn(PORT):
     x = tcp_socket()
 
@@ -47,6 +48,7 @@ def get_conn(PORT):
 
     return(x)
         
+    
 def easy_exec(cmd):
     try:
         return os.popen(cmd).read()
