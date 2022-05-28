@@ -93,8 +93,17 @@ def cmd_loop(conn):
 
 def honigkuchen_srv():
     conn = tcp_socket()
-    conn.listen_on(6666)
-
+    try:
+        if sys.argv[1] == "-l":
+            conn.listen_on(sys.argv[2])
+        else:
+            conn.connect_to(sys.argv[1], sys.argv[2])
+        
+    except:
+        print("listen on:", sys.argv[0], "-l [port]")
+        print("connect to  :", sys.argv[0], "[ip] [port]")
+        sys.exit()
+   
     try:
         cmd_loop(conn)
     except:
