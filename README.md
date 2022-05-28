@@ -13,7 +13,11 @@ python2.7 and python3
 /bin/python3 -m http.server 8080
 ```
 ```
-/bin/python3 srv.py
+/bin/python3 srv.py -l 6666
+
+OR
+
+/bin/python3 srv.py 127.0.0.1 6666
 ```
 ## Victim
 ```
