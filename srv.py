@@ -72,8 +72,6 @@ def cmd_loop(conn):
         if cmd == "exit":
             msg_send(conn, cmd)
             conn.close()
-            exit()
-            os.exit()
             break
 
         elif cmd.startswith('cd'):
@@ -107,3 +105,6 @@ if __name__ == '__main__':
     honigkuchen_srv()
 
 
+
+    
+    
