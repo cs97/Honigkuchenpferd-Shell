@@ -65,8 +65,6 @@ def msg_send(conn, cmd):
     conn.send_data(bytes(cmd + '\n', 'utf-8'))
 
 
-
-
 def cmd_loop(conn):
     while 1:
         cmd = input(msg_recive(conn))
@@ -95,7 +93,6 @@ def cmd_loop(conn):
             print(msg)
 
 
-
 def honigkuchen_srv():
     conn = tcp_socket()
     conn.listen_on(6666)
@@ -108,24 +105,5 @@ def honigkuchen_srv():
 
 if __name__ == '__main__':
     honigkuchen_srv()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
