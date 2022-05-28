@@ -11,6 +11,7 @@ import time
 IP='127.0.0.1'
 
 REVERSE=True        #False=bind shell
+
 class tcp_socket():
 
     def listen_on(self, port):
