@@ -2,7 +2,7 @@
 
 # Honigkuchenpferd-Shell
 
-free to use but doesn't mess up mmmkay !
+free to use but don't screw up mmmkay !
 
 Simple Reverse and Bind Shell
 
